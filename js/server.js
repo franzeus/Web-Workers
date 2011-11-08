@@ -3,6 +3,7 @@ var Server = {
   numberOfWorkers : 0,
   resDiv : document.getElementById('result'),
   sumAggregation : 0,
+  sumTime : 0,
   numberToCalculate : 0,
   canvas : document.getElementById('canvas'),
   context : null,
@@ -15,6 +16,7 @@ var Server = {
     Server.numberToCalculate = _numToCalc || 9000;
     Server.context = Server.canvas.getContext('2d');
     Server.sumAggregation = 0;
+    Server.sumTime = 0;
     Server.workers = [];
     Server.numberOfWorkers = _num || 1;
     Server.serverShape = new Rectangle(Server.context, (Server.canvas.width / 2) - 100, Server.canvas.height - 40, 200, 40, '#666666');
@@ -23,12 +25,23 @@ var Server = {
   },
 
   createWorkers : function() {
-    var x = (Server.canvas.width / 2) - ( (Server.numberOfWorkers * 70) / 2 + 60 );
+    GAP = 20;
+    var x = 20;
+    var y = 20;
+    for(var i=0; i < Server.numberOfWorkers; i++) {
+      if(i > 0) {
+        x = Server.workers[i-1].x + Server.workers[i-1].width + GAP;
+        if(x + Server.workers[i-1].width + GAP > Server.canvas.width) {
+          x = 20;
+          y += 120;
+        }        
+      }
+      Server.workers.push(new Thread(i, x, y));
+    }    
 
-    for(var i=0; i < Server.numberOfWorkers; i++) {         
-      Server.workers.push(new Thread(i, x));
-      x += 90;
-    }
+    /*
+    var x = (Server.canvas.width / 2) - ( (Server.numberOfWorkers * 70) / 2 + 60 );
+    }*/
     Server.assignWork();
   },
 
@@ -46,7 +59,6 @@ var Server = {
     this.draw();
 
     // Post calculation vars to thread
-    Server.startTime = new Date().getTime();
     for(var i=0; i < Server.workers.length; i++) {
       var from = range[i][0];
       var to = range[i][1];
@@ -69,12 +81,12 @@ var Server = {
     if(message.action == 'result') {
       Server.workers[message.index].setStatus('finished');
       Server.workers[message.index].worker.terminate();
-      Server.sumAggregation += message.result; 
+      Server.sumAggregation += message.result;
+      Server.workers[message.index].time = message.time;
+      Server.sumTime += message.time;
 
-      if(message.index == Server.workers.length - 1) {
-        Server.stopTime = new Date().getTime();
-        var time = Server.stopTime - Server.startTime;
-        Server.resDiv.innerHTML = time / 1000 + ' Seconds';
+      if(message.index == Server.workers.length - 1) {       
+        Server.resDiv.innerHTML = Server.sumTime / 1000 + ' Seconds';
       }
     }
     else if(message.action == 'found') {
@@ -108,7 +120,7 @@ var Server = {
 
   ping : function(_index) {
     this.resDiv.innerHTML +=  'Ping: ' + _index + '<br />';      
-    this.workers[_index].worker.postMessage({'action' : 'ping'}); //message.index
+    this.workers[_index].worker.postMessage({'action' : 'ping'});
   },
 
   supported : function() {    

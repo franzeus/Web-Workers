@@ -8,7 +8,20 @@
     #threadNum { background:#FFF; border:1px solid #CCC; color:#222; font-weight:bold; }
   </style>
   <h1>Web Worker</h1>
-  <p>Number of Threads: <input type="text" id="threadNum" size="4" value="2"> Number: <input type="text" id="calcNum" size="4" value="90000"> <input type="button" value=" Go " id="startButton"></p>
+  <p>Number of Threads: 
+  <select id="threadNum">
+    <option value="1">1</option> 
+    <option value="2">2</option> 
+    <option value="3">3</option> 
+    <option value="4">4</option> 
+    <option value="5">5</option> 
+    <option value="6">6</option> 
+    <option value="7">7</option> 
+    <option value="8">8</option> 
+    <option value="9">9</option> 
+    <option value="10">10</option>
+  </select>
+  Number: <input type="text" id="calcNum" size="4" value="90000"> <input type="button" value=" Go " id="startButton"></p>
   <canvas id="canvas" width="800" height="300"></canvas>
   <div ><pre id="result"></pre></div>
 

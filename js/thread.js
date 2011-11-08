@@ -1,9 +1,11 @@
-var Thread = function(_index, _x) {
+var Thread = function(_index, _x, _y) {
   this.index = _index;
   this.x = _x;
-  this.y = 100;
-  this.width = 70;
-  this.height = 70;
+  this.y = _y;
+  this.width = 100;
+  this.height = 100;
+
+  this.time = 0;
 
   this.color = { 
     inactive : '#F0EEC2',
@@ -34,8 +36,12 @@ Thread.prototype.draw = function() {
   Server.context.fillText(this.status, this.x + 3, this.y + 30);
 
   // Result
-  if(this.result) {
-    Server.context.fillText(this.result, this.x + 3, this.y + 50);        
+  Server.context.font = "8pt Arial";
+  Server.context.fillText(this.result, this.x + 3, this.y + 50);
+
+  // Result
+  if(this.time) {
+    Server.context.fillText('Time: ' + this.time / 1000 + ' sec', this.x + 3, this.y + 70);    
   }
 };
 

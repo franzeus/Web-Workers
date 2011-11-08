@@ -3,6 +3,9 @@ Thread = function(_index, _from, _to) {
   this.from = parseInt(_from);
   this.to = parseInt(_to);
 
+  this.startTime = null;
+  this.stopTime = null;
+
   this.result = 0;
 
   var that = this;
@@ -11,7 +14,7 @@ Thread = function(_index, _from, _to) {
 };
 Thread.prototype.calculate = function() {  
   var count = 0;
-
+  this.startTime = new Date().getTime();
   var n = '';
   var isPrime = true;
   for(var i = this.from; i < this.to; i++) {
@@ -30,6 +33,7 @@ Thread.prototype.calculate = function() {
   }
    
   this.result = count;
+  this.stopTime = new Date().getTime();
   this.postMessage('Found: ' + count, 'result');
 };
 
@@ -40,7 +44,8 @@ Thread.prototype.pong = function() {
 
 Thread.prototype.postMessage = function(_text, _action) {
   if(!_action) _action = null;
-  postMessage({ 'index' : this.index, 'action' : _action, 'text' : _text, 'result' : this.result});
+  var time = this.stopTime - this.startTime;
+  postMessage({ 'index' : this.index, 'action' : _action, 'text' : _text, 'result' : this.result, 'time' : time });
 };
 
 // Start Thread
