@@ -105,7 +105,7 @@ var Server = {
     Server.serverShape.draw();
     Server.context.fillStyle = '#FFFFFF';
     Server.context.font = "10pt Arial";
-    Server.context.fillText('Server', Server.serverShape.x + 10, Server.serverShape.y + 25);
+    Server.context.fillText('Receiver', Server.serverShape.x + 10, Server.serverShape.y + 25);
     Server.context.fillText('Total:', Server.serverShape.x + 120, Server.serverShape.y + 25);
     Server.context.fillText(Server.sumAggregation, Server.serverShape.x + 160, Server.serverShape.y + 25);
 
@@ -116,7 +116,7 @@ var Server = {
     throw event.data;
     console.log('ERROR: ' + event.data);
     Server.workers[message.index].setStatus('error');
-  },      
+  },
 
   ping : function(_index) {
     this.resDiv.innerHTML +=  'Ping: ' + _index + '<br />';      

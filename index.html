@@ -1,6 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
-  <title>Test threads</title>
+  <title>Web Workers</title>
   <body>
   <style>
     body { font-size:16px; font-family:Arial; margin:3em;}
@@ -8,21 +8,22 @@
     #threadNum { background:#FFF; border:1px solid #CCC; color:#222; font-weight:bold; }
   </style>
   <h1>Web Worker</h1>
-  This scripts uses web workers to find prime numbers.
-  <p>Number of threads: 
+  This script uses <a href="https://developer.mozilla.org/en/Using_web_workers" target="_blank">web workers</a> to find prime numbers.
+  Code is available <a href="https://github.com/webarbeit/Web-Workers" target="_blank">at Github</a>.
+  <p>Number of threads:
   <select id="threadNum">
-    <option value="1">1</option> 
-    <option value="2">2</option> 
-    <option value="3">3</option> 
-    <option value="4">4</option> 
-    <option value="5">5</option> 
-    <option value="6">6</option> 
-    <option value="7">7</option> 
-    <option value="8">8</option> 
-    <option value="9">9</option> 
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
     <option value="10">10</option>
   </select>
-  Number: <input type="text" id="calcNum" size="4" value="90000"> <input type="button" value=" Go " id="startButton"></p>
+  Number: <input type="text" id="calcNum" size="4" value="90000"> <input type="button" value=" Start " id="startButton"></p>
   <canvas id="canvas" width="800" height="300"></canvas>
   <div ><pre id="result"></pre></div>
 
