@@ -26,9 +26,9 @@ Thread.prototype.calculate = function() {
       }
       if (isPrime && i != 1) {
         //n += i + ',';
-        this.postMessage('Found: ' + count, 'found');
+        //this.postMessage('Found: ' + count, 'found');
         count++;
-      }
+      } //3.188
       isPrime = true;
   }
    
@@ -54,7 +54,6 @@ onmessage = function(event) {
   var from = event.data.from;
   var to = event.data.to;
 
-  //if(event.data.action == 'create')
   if(typeof(thread) === 'undefined')
     thread = new Thread(index, from, to);
   if (event.data.action == 'ping');
