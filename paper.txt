@@ -1,0 +1,92 @@
+Distributed Programming with Web workers
+An implementation of web workers for distributed research.
+
+OUTLINE:
+0. Introduction
+
+1. Distributed Research
+  1.1 Idea and goal of DR
+
+2. Web Workers
+  2.1 How Web Worker work
+    2.1.2 Message Passing
+  2.2 Advantages
+  2.3 Limitations of Web Workers  
+
+3. Application
+  3.1 Goal of the application
+  3.2 The calculation
+  3.3 Environment & Frameworks
+  3.4 Architecture
+    3.4.1 Server
+    3.4.1 Client
+  3.5 Implementation
+    3.4.2 File-Structure
+    3.4.3 Data-Models
+    3.4.4 The Code
+  3.6 Testing & Results
+    3.6.1 Scenario 1
+    3.6.2 Scenario 2
+    3.6.n Scenario n
+
+4. Result
+
+
+-------------------------
+# INTRODUCTION #
+-------------------------
+
+
+
+-------------------------
+# DISTRIBUTED RESEARCH #
+-------------------------
+What, why. Examples (seti@home ...)
+
+How distributed programming works ...
+
+Relation to this thesis
+
+
+
+-------------------------
+# Web Workers #
+-------------------------
+2.1 How Web Workers Work
+With web workers it is possible to run scripts in the background, just like with threads in C++ or other
+programming languages which support multithreading.
+... allows for a multi-threaded execution of JavaScript programs.
+There are two types of web workers: Dedicated worker and Shared worker ...
+
+
+Quoted: Web Worker specification[1] is a separate specification from HTML5 specification[2][3] but can be used with HTML5
+
+Workers can spawn more workers
+Timeouts and intervals
+Error handling
+Can be terminated
+Access on navigator object
+import scripts and libraries
+
+
+# Advantages
+The advantage of running a script in another thread is that the user does not has to wait until the script
+has finished, but can interact normally with the page.
+
+- Hiding scripts in background
+- User Interaction -> no blocking / interruption
+- Can use XMLHttpRequest
+- Supported currently by Safari, Chrome, Opera and Mozilla Firefox.
+  Web workers are supported in Safari for iOS 5, and in Android (operating system) 2.0[8] and later.
+  (Even mobile)
+
+
+# Restrictions
+Due to security measures:
+- No access to DOM
+- Thread safety -> spawns real OS-Level threads -> actually very secure -> but ... (https://developer.mozilla.org/en/Using_web_workers)
+
+
+# Communication / How it works
+Message passing. String or JSON (or any data type that can be serialized)
+[EXAMPLE]
