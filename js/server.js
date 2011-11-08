@@ -124,11 +124,11 @@ var Server = {
   },
 
   supported : function() {    
-     if(!window.Worker) {
-      Server.resDiv.innerHTML = "Y U NO support Webworkers!?!";
-      return false;
-     } else {
+     if(!!window.Worker) {
       return true;
+     } else {
+      Server.resDiv.innerHTML = "Y U NO support Webworkers!?!";
+      return false;      
      }
   }
 }

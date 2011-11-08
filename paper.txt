@@ -11,9 +11,14 @@ OUTLINE:
   2.1 How Web Worker work
     2.1.2 Message Passing
   2.2 Advantages
-  2.3 Limitations of Web Workers  
+  2.3 Limitations of Web Workers
 
-3. Application
+3. Application (Single Browser - simple)
+  -> PrimeNumbers
+  -> Game Logic
+
+
+3. Application (Distributed Research)
   3.1 Goal of the application
   3.2 The calculation
   3.3 Environment & Frameworks
@@ -52,14 +57,24 @@ Relation to this thesis
 -------------------------
 # Web Workers #
 -------------------------
-2.1 How Web Workers Work
+# How Web Workers Work
 With web workers it is possible to run scripts in the background, just like with threads in C++ or other
 programming languages which support multithreading.
 ... allows for a multi-threaded execution of JavaScript programs.
 There are two types of web workers: Dedicated worker and Shared worker ...
 
+QOUTED:
+  "A web worker is a single JavaScript file loaded and executed in the background on a separate thread. Dedicated web workers are linked to their creator (the script which loaded the worker). Shared web workers allow any number of scripts to communicate with a single worker.
 
-Quoted: Web Worker specification[1] is a separate specification from HTML5 specification[2][3] but can be used with HTML5
+  Shared web workers adhere to the same rules as their dedicated counterparts: no DOM, document or page script access, and limited read-only permission to most window properties. In addition, page scripts may only communicate with shared web workers from the same origin/domain (somesite.com)."
+
+  Dedicated workers: these are linked to their creator (the script which loaded the worker).
+  Shared workers: the allow any script from the same domain (somesite.com) to communicate with the worker.
+
+Quoted: 
+  Web Worker specification[1] is a separate specification from HTML5 specification[2][3] but can be used with HTML5
+Qouted:
+  Web workers are isolated from the main web page
 
 Workers can spawn more workers
 Timeouts and intervals
@@ -79,6 +94,7 @@ has finished, but can interact normally with the page.
 - Supported currently by Safari, Chrome, Opera and Mozilla Firefox.
   Web workers are supported in Safari for iOS 5, and in Android (operating system) 2.0[8] and later.
   (Even mobile)
+- Creating workers from a url 
 
 
 # Restrictions
