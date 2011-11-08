@@ -16,7 +16,7 @@ Thread.prototype.calculate = function() {
   var count = 0;
   this.startTime = new Date().getTime();
   var n = '';
-  var isPrime = true;
+  var isPrime = false;
   for(var i = this.from; i < this.to; i++) {
       for (var j = 2; j <= i; j++) {
           if ( i != j && i % j == 0 ){
@@ -24,9 +24,9 @@ Thread.prototype.calculate = function() {
             break;
           }
       }
-      if (isPrime) {
-        n += i + ',';
-        this.postMessage('Found: ' + i, 'found');
+      if (isPrime && i != 1) {
+        //n += i + ',';
+        this.postMessage('Found: ' + count, 'found');
         count++;
       }
       isPrime = true;
