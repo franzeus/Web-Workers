@@ -26,9 +26,9 @@ Thread.prototype.calculate = function() {
       }
       if (isPrime && i != 1) {
         //n += i + ',';
-        //this.postMessage('Found: ' + count, 'found');
+        //this.postMessage('Found: ' + count, 'found'); // takes to much time
         count++;
-      } //3.188
+      }
       isPrime = true;
   }
    
