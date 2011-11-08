@@ -59,11 +59,19 @@ Relation to this thesis
 -------------------------
 # How Web Workers Work
 With web workers it is possible to run scripts in the background, just like with threads in C++ or other
-programming languages which support multithreading.
+programming languages, which support multithreading.
+
+There are two types of web workers: Dedicated worker and Shared worker.
+Dedicated web workers are linked to the script which created the worker.
+Shared web workers instead, are able to communicate with other scripts from the same domain.
+
+
 ... allows for a multi-threaded execution of JavaScript programs.
 There are two types of web workers: Dedicated worker and Shared worker ...
 
 QOUTED:
+  A 'worker' is a script that will be loaded and executed in the background. 
+
   "A web worker is a single JavaScript file loaded and executed in the background on a separate thread. Dedicated web workers are linked to their creator (the script which loaded the worker). Shared web workers allow any number of scripts to communicate with a single worker.
 
   Shared web workers adhere to the same rules as their dedicated counterparts: no DOM, document or page script access, and limited read-only permission to most window properties. In addition, page scripts may only communicate with shared web workers from the same origin/domain (somesite.com)."
@@ -85,8 +93,19 @@ import scripts and libraries
 
 
 # Advantages
-The advantage of running a script in another thread is that the user does not has to wait until the script
-has finished, but can interact normally with the page.
+- Web workers improve the user interaction while running a heavy script.
+Due to the fact, that web workers don't run in the same process, as the website does, but run in an isolated
+area, web workers can help to maintain a smooth interaction. Thus the advantage of running a script in another 
+thread is that the user does not has to wait until the script has finished, but can interact normally with the page.
+This is also particularly important to maintain visitors of a website.
+
+- A lot of browsers nowadays support web workers. A sensful and successfull implementation of HTML5 features only makes sense
+if enough browsers support them. Web workers are currently supported by Safari, Chrome, Opera and Mozilla Firefox.
+Furthermore even mobile devices like Safari for iOS 5 and Android (greater 2.0), support web workers. Only the Internet Explorer
+doesn't support web workers yet. However, according to w3schools stats, 77% of the users don't use the 
+Internet Explorer. In addition IE in version 10 may support it.
+Q:http://www.w3schools.com/browsers/browsers_stats.asp
+
 
 - Hiding scripts in background
 - User Interaction -> no blocking / interruption
@@ -94,7 +113,7 @@ has finished, but can interact normally with the page.
 - Supported currently by Safari, Chrome, Opera and Mozilla Firefox.
   Web workers are supported in Safari for iOS 5, and in Android (operating system) 2.0[8] and later.
   (Even mobile)
-- Creating workers from a url 
+- Creating workers from a url
 
 
 # Restrictions
@@ -102,7 +121,12 @@ Due to security measures:
 - No access to DOM
 - Thread safety -> spawns real OS-Level threads -> actually very secure -> but ... (https://developer.mozilla.org/en/Using_web_workers)
 
+User doesn know -> Browser Limitations???
 
 # Communication / How it works
 Message passing. String or JSON (or any data type that can be serialized)
 [EXAMPLE]
+
+
+http://www.html5rocks.com/en/tutorials/workers/basics/
+http://dev.opera.com/articles/view/web-workers-rise-up/

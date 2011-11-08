@@ -63,8 +63,8 @@ var Server = {
       var from = range[i][0];
       var to = range[i][1];
 
-      Server.workers[i].worker.onmessage = Server.resultReceiver;
       Server.workers[i].worker.postMessage({'action' : 'create', 'index' : i, 'from' : from, 'to' : to});
+      Server.workers[i].worker.onmessage = Server.resultReceiver;      
       Server.workers[i].worker.onerror = Server.errorReceiver;
       Server.workers[i].setStatus('working');
     }
@@ -92,7 +92,6 @@ var Server = {
     else if(message.action == 'found') {
       Server.workers[message.index].result = message.text;
     }
-    
   },
 
   draw : function() {
