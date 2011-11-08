@@ -20,7 +20,7 @@ var Thread = function(_index, _x, _y) {
   this.text = 'Thread ' + this.index;
   this.result = null;
   this.status = 'working ...';
-  this.worker = new Worker("js/my_task.js");
+  this.worker = new Worker("js/primenumber.js");
 };
 
 Thread.prototype.draw = function() {
