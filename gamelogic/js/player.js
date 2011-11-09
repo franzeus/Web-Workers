@@ -26,8 +26,8 @@ var Player = {
   update : function() {
     
     if(Player.nextPointIndex > Player.path.length - 1) {
-      this.xDir = 0;
-      this.yDir = 0;
+      Player.xDir = 0;
+      Player.yDir = 0;
       this.shape.color = 'rgba(111, 214, 229, 0.4)'
       return false;
     }
@@ -40,16 +40,17 @@ var Player = {
         Player.nextPointIndex += 1;
 
         if(Player.nextPointIndex < Player.path.length) {
-          this.xDir = (Player.path[Player.nextPointIndex][0] - currentX) / 100; 
-          this.yDir = (Player.path[Player.nextPointIndex][1] - currentY) / 100;        
+          Player.xDir = (Player.path[Player.nextPointIndex][0] - currentX) / 100; 
+          Player.yDir = (Player.path[Player.nextPointIndex][1] - currentY) / 100;        
         }
       }
     }  
 
-    Player.shape.x += this.xDir;
-    Player.shape.y += this.yDir;
+    Player.shape.x += Player.xDir;
+    Player.shape.y += Player.yDir;
   },
 
+  // To try it with thread
   resultReceiver : function(event) {
     var message = event.data;
 
@@ -65,7 +66,7 @@ var Player = {
     // Try update logic in thread -> uncomment Player.update() in draw()
     //Player.worker.postMessage({ 'index' : 0, 'path' : _path, x : Player.x, y : Player.y });
 
-    this.xDir = (_path[0][0] - this.x) / 100;
-    this.yDir = (_path[0][1] - this.y) / 100;
+    Player.xDir = (_path[0][0] - this.x) / 100;
+    Player.yDir = (_path[0][1] - this.y) / 100;
   },
 };

@@ -37,17 +37,21 @@ var Server = {
         mouseX <= (block.shape.x + block.shape.width) && 
         mouseY >= block.shape.y &&
         mouseY <= block.shape.y + block.shape.height) {
+
+          // Set Source
           if(Server.source == null) {
+            Server.blocks.forEach(function(block) {
+              block.shape.color = '#008800';
+            }); 
             Server.source = block.index;
+          // Set Destination
           } else {
             Server.destination = block.index;
             Server.findPath();            
-            Server.reset();
           }
           block.clickEvent();
         }
-      });
-      
+      });      
     });
   },
 
@@ -63,7 +67,7 @@ var Server = {
   findPath : function(src, dest) {
     Server.destination = dest || Server.destination;
     Server.source = src || Server.source;
-
+        
     Server.thread1 = new Thread();
     Server.thread1.postMessage({ 'index' : 0, 'from' : Server.source, 'to' : Server.destination, 'graph' : Server.graph });
     Server.reset();
@@ -73,11 +77,7 @@ var Server = {
     Server.lines = [];
     Server.context.clearRect(0, 0, Server.canvas.width, Server.canvas.height);
     this.draw();
-    Server.source = null;
-
-    Server.blocks.forEach(function(block) {
-      block.shape.color = '#008800';
-    });    
+    Server.source = null;   
   },
 
   createLine : function(startX, startY, endX, endY) {    
