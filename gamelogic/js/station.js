@@ -5,7 +5,7 @@ var Station = function(_index, _connections, _x, _y, _w, _h) {
   this.width = _w;
   this.height = _h;
 
-  this.stationShape = new Rectangle(Server.context, this.x, this.y, this.width, this.height, '#008800');
+  this.stationShape = new Rectangle({ context: Server.context, x: this.x, y: this.y, width: this.width, height: this.height, color: '#008800' });
   this.connections = _connections;
 };
 //
