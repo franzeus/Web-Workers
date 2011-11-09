@@ -77,14 +77,14 @@ var Server = {
     Server.blocks = [];
     Server.lines = [];
     Server.graph = {
-      a: { name: 'a', edges: { b: 10 }, x: 100, y: 40 },
-      b: { name: 'b', edges: { c: 5, d: 1, e: 1}, x: 300 , y: 40},
-      c: { name: 'c', edges: { d: 5, f: 1}, x: 300, y: 200},
-      d: { name: 'd', edges: { b: 1}, x: 100, y: 200 },
-      e: { name: 'e', edges: { c: 1, h :1}, x: 500, y: 40 },
-      f: { name: 'f', edges: { e: 1, b: 2}, x: 500, y: 200 },
-      g: { name: 'g', edges: { h: 1}, x: 700, y: 40 },
-      h: { name: 'h', edges: { e: 1, f: 1}, x: 700, y: 200 }
+      a: { name: 'a', edges: { b: 1 },            x: 50,  y: 40  },
+      b: { name: 'b', edges: { c: 1, e: 1},       x: 250, y: 40  },
+      c: { name: 'c', edges: { g: 5},             x: 450, y: 40  },
+      d: { name: 'd', edges: { g: 1},             x: 650, y: 40  },
+      e: { name: 'e', edges: { a: 1},             x: 50, y: 200 },
+      f: { name: 'f', edges: { g: 1, b: 2},       x: 250, y: 200 },
+      g: { name: 'g', edges: { f: 1, h: 1},       x: 450, y: 200 },
+      h: { name: 'h', edges: { d: 1},             x: 650, y: 200 }
     }
 
     document.getElementById('canvas').addEventListener('onkeypress', function(e){
