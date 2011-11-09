@@ -6,6 +6,8 @@ Thread = function(_index, _from, _to, _graph) {
   this.to = parseInt(_to);
   this.graph = _graph;
 
+  postMessage({ 'graph' : _graph});
+  
   this.startTime = null;
   this.stopTime = null;
 
@@ -38,7 +40,7 @@ onmessage = function(event) {
   var to = event.data.to;
   var graph = event.data.graph;
 
-  postMessage({ 'action' : 'result', 'graph' : graph});
+  
 
   if(typeof(thread) === 'undefined')
     thread = new Thread(index, from, to, graph);

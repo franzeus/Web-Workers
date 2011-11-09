@@ -49,8 +49,7 @@ var Server = {
     for(var i=0; i<path.length; i++) {
       if(i < path.length - 1)
         Server.drawLine(Server.graph[path[i]].x, Server.graph[path[i]].y, Server.graph[path[i+1]].x, Server.graph[path[i+1]].y);
-    } 
-    
+    }    
   },
 
   drawLine : function(startX, startY, endX, endY) {  
@@ -58,7 +57,7 @@ var Server = {
     Server.context.lineWidth   = 2;
     Server.context.beginPath();
     Server.context.moveTo(startX + 20, startY + 20); 
-    Server.context.lineTo(endX + 20, endY + 20);    
+    Server.context.lineTo(endX + 20, endY + 20);
     Server.context.stroke();
     Server.context.closePath();
 
