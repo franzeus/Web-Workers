@@ -2,7 +2,7 @@ var Thread = function(_index) {
   this.index = _index;
 
   this.time = 0;
-  this.worker = new Worker("js/pathfinder.js");
+  this.worker = new Worker("js/thread_pathfinder.js");
   this.worker.onmessage = this.resultReceiver;
   this.worker.onerror = this.errorReceiver;
 
@@ -35,4 +35,8 @@ Thread.prototype.setResult = function(_result) {
 
 Thread.prototype.errorReceiver = function(event) {
   console.log(event.data);
+};
+
+Thread.prototype.terminate = function(event) {
+  this.worker.terminate();
 };

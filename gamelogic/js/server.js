@@ -13,6 +13,9 @@ var Player = {
     Player.path = [];
     Player.isVisible = false;
     Player.nextPointIndex = 0;
+
+    Player.worker = new Worker("js/thread_playerupdate.js");
+    Player.worker.onmessage = Player.resultReceiver;
   },
 
   draw : function() {
@@ -21,7 +24,7 @@ var Player = {
   },
 
   update : function() {
-
+    
     if(Player.nextPointIndex > Player.path.length - 1) {
       this.xDir = 0;
       this.yDir = 0;
@@ -42,15 +45,26 @@ var Player = {
         }
       }
     }
+  
 
     Player.shape.x += this.xDir;
     Player.shape.y += this.yDir;
+  },
+
+  resultReceiver : function(event) {
+    var message = event.data;
+
+    Player.shape.x = message.x;
+    Player.shape.y = message.y;
   },
 
   setPath : function(_path) {
     if(!_path[0]) return false;
     Player.path = _path;
     Player.isVisible = true;
+
+    // Try update logic in thread -> uncomment Player.update() in draw()
+    //Player.worker.postMessage({ 'index' : 0, 'path' : _path, x : Player.x, y : Player.y });
 
     this.xDir = (_path[0][0] - this.x) / 100;
     this.yDir = (_path[0][1] - this.y) / 100;
