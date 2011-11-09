@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <title>Web Workers - Gamelogic</title>
+  <body>
+  <style>
+    body { font-size:16px; font-family:Arial; margin:3em;}
+    canvas { background:#F6F6F6; }
+    #threadNum { background:#FFF; border:1px solid #CCC; color:#222; font-weight:bold; }
+    .form {  margin-top:1em; padding-top:0.5em; }
+ </style>
+      
+ <h1>Web Worker</h1>
+ This script uses <a href="https://developer.mozilla.org/en/Using_web_workers" target="_blank">web workers</a> for faster path finding.
+ Code is available <a href="https://github.com/webarbeit/Web-Workers" target="_blank">at Github</a>.
+      
+ <div class="form">
+  Source:
+  <select id="source">
+    <option value="a">a</option>
+    <option value="b">b</option>
+    <option value="c">c</option>
+    <option value="d">d</option>
+    <option value="e">e</option>
+    <option value="f">f</option>
+    <option value="g">g</option>
+    <option value="h">h</option>
+  </select>
+
+  Destination:
+  <select id="destination">
+    <option value="a">a</option>
+    <option value="b">b</option>
+    <option value="c">c</option>
+    <option value="d">d</option>
+    <option value="e">e</option>
+    <option value="f">f</option>
+    <option value="g">g</option>
+    <option value="h">h</option>
+  </select>
+  <input type="button" value=" Start " id="startButton">
+ </div>
+      
+ <canvas id="canvas" width="800" height="300"></canvas>
+ <div ><pre id="result"></pre></div>
+
+ <script language="javascript" src="js/shapes.js"></script>
+  <script language="javascript" src="js/dijkstra.js"></script>  
+  <script language="javascript" src="js/station.js"></script>
+  <script language="javascript" src="js/server.js"></script>
+  <script language="javascript" src="js/thread.js"></script>
+ <script language="javascript" src="js/application.js"></script>
+</body>
+</html>
