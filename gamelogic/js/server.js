@@ -44,15 +44,16 @@ var Server = {
     var thread = new Thread();
     thread.postMessage({ 'index' : 0, 'from' : src, 'to' : dest, 'graph' : Server.graph });
 
+    /*
     var path = dijkstra.find_path(Server.graph, src, dest);
     
     for(var i=0; i<path.length; i++) {
       if(i < path.length - 1)
         Server.drawLine(Server.graph[path[i]].x, Server.graph[path[i]].y, Server.graph[path[i+1]].x, Server.graph[path[i+1]].y);
-    }    
+    } */   
   },
 
-  drawLine : function(startX, startY, endX, endY) {  
+  drawLine : function(startX, startY, endX, endY) {
     Server.context.strokeStyle = '#f00';
     Server.context.lineWidth   = 2;
     Server.context.beginPath();
@@ -60,24 +61,14 @@ var Server = {
     Server.context.lineTo(endX + 20, endY + 20);
     Server.context.stroke();
     Server.context.closePath();
-
   },
 
-  resultReceiver : function(event) {
-    var message = event.data;
+  resultReceiver : function(message) {    
+    Server.resDiv.innerHTML = message.time / 1000 + ' Seconds';
 
-    //Server.resDiv.innerHTML +=  message.index + ': ' + message.text + '<br />';
-          
-    if(message.action == 'result') {
-      
-      Server.sumTime += message.time;
-
-      if(message.index == Server.workers.length - 1) {       
-        Server.resDiv.innerHTML = Server.sumTime / 1000 + ' Seconds';
-      }
-    }
-    else if(message.action == 'found') {
-      Server.workers[message.index].result = message.text;
+    for(var i=0; i < message.result.length; i++) {
+      if(i < message.result.length - 1)
+        Server.drawLine(Server.graph[message.result[i]].x, Server.graph[message.result[i]].y, Server.graph[message.result[i+1]].x, Server.graph[message.result[i+1]].y);
     }
   },
 
@@ -89,16 +80,6 @@ var Server = {
     });
 
     //setTimeout(function() { Server.draw(); } , 50);
-  },
-
-  update : function() {
-    
-  },
-
-  errorReceiver : function(event) {
-    throw event.data;
-    console.log('ERROR: ' + event.data);
-    Server.workers[message.index].setStatus('error');
   },
 
   supported : function() {    

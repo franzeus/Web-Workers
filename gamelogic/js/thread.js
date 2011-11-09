@@ -13,23 +13,24 @@ var Thread = function(_index) {
     error     : { color : '#EB9B81', label : 'error'}
   }
 
-  this.result = null;  
+  this.result = null;
 };
 
-Thread.prototype.postMessage = function(_data) {       
+Thread.prototype.postMessage = function(_data) {
   this.worker.postMessage(_data);
 };
 
-Thread.prototype.stop = function() {       
+Thread.prototype.stop = function() {
   this.worker.terminate();
 };
 
-Thread.prototype.resultReceiver = function(event) {     
+Thread.prototype.resultReceiver = function(event) {
   var message = event.data;
   console.log(message);
+  Server.resultReceiver(message);  
 };
 
-Thread.prototype.setResult = function(_result) {       
+Thread.prototype.setResult = function(_result) {
   this.result = _result;
 };
 
