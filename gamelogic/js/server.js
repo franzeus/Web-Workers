@@ -58,7 +58,7 @@ var Server = {
   createGraphs : function() {
     for(var prop in Server.graph ) {
         if(Server.graph.hasOwnProperty(prop))
-          Server.blocks.push(new Station(Server.graph[prop].name, Server.graph[prop].edges, Server.graph[prop].x, Server.graph[prop].y, 40, 40)); // A
+          Server.blocks.push(new Station(Server.graph[prop].name, Server.graph[prop].edges, Server.graph[prop].x, Server.graph[prop].y, 40, 40));
     }
     this.draw();
   },

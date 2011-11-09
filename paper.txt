@@ -14,9 +14,10 @@ OUTLINE:
   2.3 Limitations of Web Workers
 
 3. Application (Single Browser - simple)
-  -> PrimeNumbers
-  -> Game Logic
-
+  -> PrimeNumbers (Research)
+    => Limit of 3 threads?
+  -> Pathfinding (Canvas)
+    => Not useful for animating canvas objects
 
 3. Application (Distributed Research)
   3.1 Goal of the application
