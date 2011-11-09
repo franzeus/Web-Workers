@@ -10,7 +10,7 @@ var Player = {
   init : function(_x, _y) {
     Player.x = _x + 20;
     Player.y = _y + 20;
-    Player.shape = new Circle({ context: Server.context, x: Player.x, y: Player.y, radius: 10, color: '#CC1111' });
+    Player.shape = new Circle({ context: Server.context, x: Player.x, y: Player.y, radius: 10, color: 'rgba(111, 214, 229, 0.9)' });
     Player.path = [];
     Player.isVisible = false;
     Player.nextPointIndex = 0;
@@ -18,7 +18,7 @@ var Player = {
 
   draw : function() {
     Player.shape.draw();
-    //Player.update();
+    Player.update();
   },
 
   update : function() {
@@ -26,6 +26,7 @@ var Player = {
     if(Player.nextPointIndex > Player.path.length - 1) {
       this.xDir = 0;
       this.yDir = 0;
+      this.shape.color = 'rgba(111, 214, 229, 0.4)'
       return false;
     }
 
@@ -116,7 +117,7 @@ var Server = {
       endX: endX + 20,
       endY: endY + 20,
       lineWidth: 2,
-      color: '#666666'
+      color: '#FFFFFF'
     });
     Server.lines.push(line);
   },
@@ -128,7 +129,7 @@ var Server = {
     for(var i=0; i < message.result.length; i++) {
       if(i < message.result.length - 1) {
         Server.createLine(Server.graph[message.result[i]].x, Server.graph[message.result[i]].y, Server.graph[message.result[i+1]].x, Server.graph[message.result[i+1]].y);
-        playerPath.push(new Array(Server.graph[message.result[i+1]].x, Server.graph[message.result[i+1]].y));
+        playerPath.push(new Array(Server.graph[message.result[i+1]].x + 20, Server.graph[message.result[i+1]].y + 20));
       }
     }
 
