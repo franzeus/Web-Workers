@@ -5,12 +5,12 @@ var Station = function(_index, _connections, _x, _y, _w, _h) {
   this.width = _w;
   this.height = _h;
 
-  this.stationShape = new Rectangle({ context: Server.context, x: this.x, y: this.y, width: this.width, height: this.height, color: '#008800' });
+  this.shape = new Rectangle({ context: Server.context, x: this.x, y: this.y, width: this.width, height: this.height, color: '#008800' });
   this.connections = _connections;
 };
 //
 Station.prototype.draw = function() {
-  this.stationShape.draw();
+  this.shape.draw();
 
   Server.context.fillStyle = '#F6F6F6';
   Server.context.font = "10pt Arial";
@@ -19,7 +19,7 @@ Station.prototype.draw = function() {
 };
 //
 Station.prototype.clickEvent = function() {
-
+  this.shape.color = '#008888';
 };
 //
 Station.prototype.showConnections = function() {

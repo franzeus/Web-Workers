@@ -1,5 +1,4 @@
 var Player = {
-  
   x : 0,
   y : 0,
   shape : null,
@@ -71,6 +70,8 @@ var Server = {
   graph: null,
   lines: null,
   thread1 : null,
+  source : null,
+  destination: null,
 
   init : function() {
     Server.context = Server.canvas.getContext('2d');
@@ -87,8 +88,26 @@ var Server = {
       h: { name: 'h', edges: { d: 1},             x: 650, y: 200 }
     }
 
-    document.getElementById('canvas').addEventListener('onkeypress', function(e){
-      console.log(e.keyCode);
+    document.getElementById('canvas').addEventListener('click', function(e) {
+      var mouseX = Server.getMousePosition(e)[0];
+      var mouseY = Server.getMousePosition(e)[1];
+
+      Server.blocks.forEach(function(block) {
+        if( mouseX >= block.shape.x && 
+        mouseX <= (block.shape.x + block.shape.width) && 
+        mouseY >= block.shape.y &&
+        mouseY <= block.shape.y + block.shape.height) {
+          if(Server.source == null) {
+            Server.source = block.index;
+          } else {
+            Server.destination = block.index;
+            Server.findPath();            
+            Server.reset();
+          }
+          block.clickEvent();
+        }
+      });
+      
     });
   },
 
@@ -100,13 +119,25 @@ var Server = {
     this.draw();
   },
 
+  // Start worker
   findPath : function(src, dest) {
+    Server.destination = dest || Server.destination;
+    Server.source = src || Server.source;
+
+    Server.thread1 = new Thread();
+    Server.thread1.postMessage({ 'index' : 0, 'from' : Server.source, 'to' : Server.destination, 'graph' : Server.graph });
+    Server.reset();
+  },
+
+  reset : function() {
     Server.lines = [];
     Server.context.clearRect(0, 0, Server.canvas.width, Server.canvas.height);
     this.draw();
+    Server.source = null;
 
-    Server.thread1 = new Thread();
-    Server.thread1.postMessage({ 'index' : 0, 'from' : src, 'to' : dest, 'graph' : Server.graph });
+    Server.blocks.forEach(function(block) {
+      block.shape.color = '#008800';
+    });    
   },
 
   createLine : function(startX, startY, endX, endY) {    
@@ -137,6 +168,7 @@ var Server = {
     Player.setPath(playerPath);
   },
 
+  // Draw on canvas
   draw : function() {
     Server.context.clearRect(0,0,Server.canvas.width, Server.canvas.height);    
 
@@ -157,6 +189,24 @@ var Server = {
     setTimeout(function() { Server.draw(); } , 50);
   },
 
+  // Returns current mouseposition
+  getMousePosition : function(e) {
+    var x, y;
+
+    if (e.pageX || e.pageY) {
+      x = e.pageX; y = e.pageY;
+    } else { 
+      x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft; 
+      y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop; 
+    }
+
+    x -= Server.canvas.offsetLeft;  
+    y -= Server.canvas.offsetTop;
+
+    return [x,y];
+  },
+
+  // Returns true if web workers are supported by browser
   supported : function() {
      if(!!window.Worker) {
       return true;

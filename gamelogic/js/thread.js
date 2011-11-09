@@ -3,7 +3,7 @@ var Thread = function(_index) {
 
   this.time = 0;
   this.worker = new Worker("js/pathfinder.js");
-  this.worker.onmessage = this.resultReceiver;      
+  this.worker.onmessage = this.resultReceiver;
   this.worker.onerror = this.errorReceiver;
 
   this.stats = {
