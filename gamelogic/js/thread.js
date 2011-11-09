@@ -26,7 +26,6 @@ Thread.prototype.stop = function() {
 
 Thread.prototype.resultReceiver = function(event) {
   var message = event.data;
-  console.log(message);
   Server.resultReceiver(message);  
 };
 

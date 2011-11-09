@@ -8,6 +8,7 @@ var Server = {
   canvas : document.getElementById('canvas'),
   context : null,
   graph: null,
+  thread1 : null,
 
   init : function() {
     Server.context = Server.canvas.getContext('2d');
@@ -15,10 +16,10 @@ var Server = {
 
     Server.graph = {
       a: { name: 'a', edges: { b: 10 }, x: 100, y: 40 },
-      b: { name: 'b', edges: { c: 5, d: 1}, x: 300 , y: 40},
+      b: { name: 'b', edges: { c: 5, d: 1, e: 1}, x: 300 , y: 40},
       c: { name: 'c', edges: { d: 5, f: 1}, x: 300, y: 200},
       d: { name: 'd', edges: { b: 1}, x: 100, y: 200 },
-      e: { name: 'e', edges: { c: 1, g: 1}, x: 500, y: 40 },
+      e: { name: 'e', edges: { c: 1, h :1}, x: 500, y: 40 },
       f: { name: 'f', edges: { e: 1, b: 2}, x: 500, y: 200 },
       g: { name: 'g', edges: { h: 1}, x: 700, y: 40 },
       h: { name: 'h', edges: { e: 1, f: 1}, x: 700, y: 200 }
@@ -41,16 +42,8 @@ var Server = {
     Server.context.clearRect(0, 0, Server.canvas.width, Server.canvas.height);
     this.draw();
 
-    var thread = new Thread();
-    thread.postMessage({ 'index' : 0, 'from' : src, 'to' : dest, 'graph' : Server.graph });
-
-    /*
-    var path = dijkstra.find_path(Server.graph, src, dest);
-    
-    for(var i=0; i<path.length; i++) {
-      if(i < path.length - 1)
-        Server.drawLine(Server.graph[path[i]].x, Server.graph[path[i]].y, Server.graph[path[i+1]].x, Server.graph[path[i+1]].y);
-    } */   
+    Server.thread1 = new Thread();
+    Server.thread1.postMessage({ 'index' : 0, 'from' : src, 'to' : dest, 'graph' : Server.graph });
   },
 
   drawLine : function(startX, startY, endX, endY) {
