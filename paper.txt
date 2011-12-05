@@ -8,34 +8,86 @@ OUTLINE:
   1.1 Idea and goal of DR
 
 2. Web Workers
-  2.1 How Web Worker work
-    2.1.2 Message Passing
+  2.1 How Web Worker work 
   2.2 Advantages
   2.3 Limitations of Web Workers
 
 3. Application (Single Browser - simple)
-  -> PrimeNumbers (Research)
-    => Limit of 3 threads?
   -> Pathfinding (Canvas)
-    => Not useful for animating canvas objects
 
-3. Application (Distributed Research)
-  3.1 Goal of the application
-  3.2 The calculation
-  3.3 Environment & Frameworks
-  3.4 Architecture
-    3.4.1 Server
-    3.4.1 Client
-  3.5 Implementation
-    3.4.2 File-Structure
-    3.4.3 Data-Models
-    3.4.4 The Code
-  3.6 Testing & Results
-    3.6.1 Scenario 1
-    3.6.2 Scenario 2
-    3.6.n Scenario n
+4. Application (Distributed Research)
+  4.1 Goal of the application
+  4.2 The calculation
+  4.3 Environment & Frameworks
+  4.4 Architecture
+  4 3.4.1 Server
+  4 3.4.1 Client
+  4.5 Implementation
+  4 3.4.2 File-Structure
+  4 3.4.3 Data-Models
+  4 3.4.4 The Code
+  4.6 Testing & Results
 
-4. Result
+5. Result
+------------------------------------------
+0. Intro
+Einführung zum Thema. Etc.
+
+----------
+1. Distributed research
+Den Sinn und die Möglichkeiten von Distributed Research erläutern.
+Auch ein bisschen wie es technisch implementiert wird.
+
+----------
+2. Web workers
+Wie Web Workers funktionieren. Eigenschaften von Web workers.
+
+----------
+3. Implement an application with web workers in a single browser
+Eine Applikation erstellen, die mit Web workers läuft.
+Diese soll aber noch nicht über einen Server Informationen beziehen.
+Idee: Pathfinding mit Web workers.
+D.h. mit Hilfe von Web workers und dem Dijkstra-Algorithmus wird ein Pfad gefunden.
+
+----------
+4a. Implement an application with web workers and nodeJs (server - clients)
+Idee: Mehrere Rechner (Clients) rechnen an einem Problem.
+Dabei verteilt ein Server die Rechenaufgaben und sammelt die Ergebnisse.
+
+Zum Beispiel:
+Es gibt 2 Clients.
+Der Server teilt die Aufgabe und schickt diese an die Clients.
+Die Clients starten einen web worker. Der web worker rechnet die Aufgabe (also im Hintergrund).
+Sobald dieser fertig ist schickt der Client das Ergenis zurück an den Server.
+
+Facedetection: Redis hat URL mit Bildern. Clients bekommen path von Bildern. Clients berechnen face detection.
+
+Entwicklungs-Umgebung:
+Als 'Plattform' würde ich Rails 3 benutzen (damit man das ganze später noch als richtige web applikation ausbauen könnte).
+Client: Nur Javascript mit JQuery und Socket.io.
+Server: NodeJS, verarbeitet die Clients.
+Redis als Datenbank.
+
+
+4b. Implement an application with web workers and nodeJs (client - client)
+Idee: Ein (inaktiver) Client rechnet etwas für einen anderen Client.
+
+Clients die nicht sehr viele Ressourcen haben (Smartphones) um clientseitig
+etwas zu berechnen (zumindest nicht so schnell).
+D.h. ein Client[1] schiebt die Arbeit zu einem anderen Client[2] (Zum Beispiel ein User, der 
+auf der Webseite länger inaktiv war). Client[2] startet einen Web worker 
+und berechnet für Client[1] das Ergebnis.
+
+Man könnte zum Beispiel die Koordinaten von Gesichtern in Bilder (also facedetection)
+berechnen lassen.
+
+Entwicklungs-Umgebung wäre die Gleiche wie bei 4a.
+
+----------
+5. Result
+
+
+
 
 
 -------------------------

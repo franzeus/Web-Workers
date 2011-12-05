@@ -2,7 +2,7 @@ var Thread = function(_index) {
   this.index = _index;
 
   this.time = 0;
-  this.worker = new Worker("js/worker_facedetection.js");
+  this.worker = new Worker("js/worker_facedetecton.js");
   this.worker.onmessage = this.resultReceiver;
   this.worker.onerror = this.errorReceiver;
 
@@ -26,7 +26,8 @@ Thread.prototype.stop = function() {
 
 Thread.prototype.resultReceiver = function(event) {
   var message = event.data;
-  Server.resultReceiver(message);
+  console.log(message.x, message.y, message.w, message.h);
+  $('.faceBox').clone().css({ left: message.x, top: message.y, width: message.w, height: message.h}).appendTo('body').fadeIn();
 };
 
 Thread.prototype.setResult = function(_result) {
