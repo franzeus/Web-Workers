@@ -1,0 +1,31 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+  <title>Web Workers - Facedetection</title>
+  <style>
+    body { font-size:16px; font-family:Arial; margin:3em;}
+    canvas { background:#111111; }
+    #threadNum { background:#FFF; border:1px solid #CCC; color:#222; font-weight:bold; }
+    .form {  margin-top:1em; padding-top:0.5em; }
+    .faceBox { display:none; position:absolute; border:2px solid red; z-index:9999;}
+ </style>
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+</head>
+<body>      
+<h1>Web Worker</h1>
+This script uses a <a href="https://developer.mozilla.org/en/Using_web_workers" target="_blank">web worker</a> for facedetection.
+Code is available <a href="https://github.com/webarbeit/Web-Workers" target="_blank">at Github</a>.
+
+<p><input type="button" id="startButton" value=" Start " style="display:block"></p>  
+
+<canvas id="canvas" width="131" height="148"></canvas>
+
+<div class="faceBox"></div>
+
+<div ><pre id="result"></pre></div>
+
+<script language="javascript" src="js/ccv.js"></script>
+<script language="javascript" src="js/face.js"></script>
+<script language="javascript" src="js/application.js"></script>
+</body>
+</html>
